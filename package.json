@@ -13,7 +13,7 @@
   "type": "module",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.1",
     "connect-mongo": "^5.1.0",
     "connect-mongodb-session": "^3.1.1",

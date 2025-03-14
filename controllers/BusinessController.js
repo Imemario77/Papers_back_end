@@ -1,5 +1,4 @@
-import bcrypt from "bcrypt";
-
+import bcrypt from "bcryptjs";
 import { ActiveLoginAccount } from "../helpers/databaseSchema/ActiveAccount.js";
 import { Business } from "../helpers/databaseSchema/Business.js";
 import { User } from "../helpers/databaseSchema/user.js";
@@ -82,9 +81,9 @@ export const addUserToBusiness = async (req, res) => {
                 userId: found_user._id,
               });
               if (account_login_status) {
-                return res
-                  .status(409)
-                  .json({ message: "This user is currently in another business" });
+                return res.status(409).json({
+                  message: "This user is currently in another business",
+                });
               }
               const account = await found_business.updateOne({
                 $push: { employees: found_user._id },
@@ -255,7 +254,6 @@ export const getBusinessDetails = async (req, res) => {
     const result = await ActiveLoginAccount.findOne({
       userId: req.session.user._id,
     });
-
 
     if (result)
       try {

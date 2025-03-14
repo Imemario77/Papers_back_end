@@ -14,9 +14,11 @@ import salesRoute from "./router/salesRoute.js";
 import invoiceRoute from "./router/invoiceRoute.js";
 import userRoute from "./router/userRoute.js";
 import otpRoute from "./router/otpRoute.js";
+
 const app = express();
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Papers", {
+  .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Papers", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -32,7 +34,7 @@ const oneDay = 1000 * 60 * 60 * 24;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: [process.env.FRONTEND_URL || "http://localhost:5173"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -41,10 +43,12 @@ app.use(
 // app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
 app.use(
   session({
-    secret: "hello world",
+    secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/Papers" }),
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Papers",
+    }),
     cookie: {
       httpOnly: true,
       maxAge: oneDay,
@@ -68,8 +72,8 @@ app.use("/invoice", invoiceRoute);
 app.use("/user", userRoute);
 app.use("/otp", otpRoute);
 
-app.listen(10000, () => {
-  console.log("server started on port 3000");
-});
+// app.listen(10000, () => {
+//   console.log("server started on port 3000");
+// });
 
 export default app;

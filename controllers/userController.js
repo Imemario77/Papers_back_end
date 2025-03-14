@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 import { User } from "../helpers/databaseSchema/user.js";
 import { isEmpty } from "../helpers/functions/validation.js";
