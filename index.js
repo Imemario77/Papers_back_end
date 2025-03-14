@@ -64,6 +64,6 @@ app.use("/invoice", invoiceRoute);
 app.use("/user", userRoute);
 app.use("/otp", otpRoute);
 
-app.listen(3000, () => {
+app.listen(10000, () => {
   console.log("server started on port 3000");
 });
