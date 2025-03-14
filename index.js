@@ -52,6 +52,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 // url routes to call 'api endpoints'
 app.use("/auth", loginRoute);
 app.use("/business", businessRoute);
