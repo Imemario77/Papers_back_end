@@ -67,3 +67,5 @@ app.use("/otp", otpRoute);
 app.listen(10000, () => {
   console.log("server started on port 3000");
 });
+
+export default app;
